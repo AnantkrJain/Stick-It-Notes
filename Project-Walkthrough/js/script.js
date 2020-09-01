@@ -1,3 +1,8 @@
+if ("serviceWorker" in navigator) {
+    // register service worker
+    navigator.serviceWorker.register("service-worker.js");
+}
+
 let count = Number(window.localStorage.getItem("count"));
 if(!count) {
     window.localStorage.setItem("count", "0");
@@ -57,7 +62,10 @@ function createNoteFromInput(e) {
 function removeItem(e) {
 
     if(e.target.classList.contains("delete")) {
-        if(confirm('Are you sure you want to delete the note?')) {
+        if(confirm('Are you sure to delete the "' +
+                    e.target.previousElementSibling.innerText +
+                    '" note?')
+        ) {
             let li = e.target.parentElement.parentElement;
             let ul = document.getElementById("notes");
 
